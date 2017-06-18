@@ -306,7 +306,7 @@ class VendorController extends Controller
             self::saveVendorPaymet($_POST, $endDate);
         }
         $nextDate = date('Y-m-d', strtotime($startDate . ' + 1 day'));
-        $totalPendingMap = VendorDao::getAllVendorPayableAmount($nextDate, $endDate);
+        $totalPendingMap = VendorDao::newGetAllVendorPayableAmount($nextDate, $endDate);
         $initialPendingMap = VendorDao::getAllVendorInitialPending($startDate);
         $lastPaymentDetails = VendorDao::getVendorLastPaymentDetails();
 //        echo '<pre>';
