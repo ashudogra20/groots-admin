@@ -248,9 +248,19 @@ class PurchaseHeaderController extends Controller
     {
         //echo "<pre>";
         //var_dump($_POST);die;
+        $user = '';
         $w_id = '';
         if (isset($_GET['w_id'])) {
             $w_id = $_GET['w_id'];
+        }
+        if(($this->checkAccessByData(array('ProcurementEditor', 'PurchaseEditor'), array('warehouse_id' => $w_id)))){
+            $user = 'ProcurementEditor';
+        }
+        if($this->checkAccessByData('PurchaseEditor', array('warehouse_id' => $w_id))){
+            $user = 'PurchaseEditor';
+        }
+        if($this->checkAccessByData('SuperAdmin', array('warehouse_id' => $w_id))){
+            $user = 'SuperAdmin';
         }
         $model = $this->loadModel($id);
         /*if(!($this->checkAccess('ProcurementEditor', array('warehouse_id'=>$w_id)) || $this->checkAccess('PurchaseEditor',array('warehouse_id'=>$w_id)))){
@@ -351,7 +361,7 @@ class PurchaseHeaderController extends Controller
                             //echo 'here'.'<br>';
                             //var_dump($order_qty, $received_qty);
                             //die('here');
-                            if ($order_qty > 0.00) {
+                            if ($order_qty > 0.00 && $user != 'PurchaseEditor') {
                                 //die('here');
                                 $unitPrice = trim($_POST['price'][$key]);
                                 $totalPrice = trim($_POST['totalPrice'][$key]);
