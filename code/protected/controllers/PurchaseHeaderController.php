@@ -176,9 +176,9 @@ class PurchaseHeaderController extends Controller
                                 $unitPrice = $_POST['price'][$key];
                                 $totalPrice = $_POST['totalPrice'][$key];
                                 $vendorId = $_POST['vendorId'][$key];
-                                $urd_number = trim($_POST['urd_number'][$key]);
+                                $urd_number = isset(trim($_POST['urd_number'][$key])) ? trim($_POST['urd_number'][$key]) : 0;
                                 $isParent = ($_POST['parent_id'][$key] == 0) ? true : false;
-                                $flag = PurchaseHeader::validatePriceVendorInput($unitPrice, $totalPrice, $vendorId, $urd_number, $isParent);
+                                $flag = PurchaseHeader::validatePriceVendorInput($unitPrice, $totalPrice, $vendorId, $isParent);
                                 if ($flag['status'] == 1) {
                                     $purchaseLine = new PurchaseLine();
                                     $purchaseLine->purchase_id = $model->id;
@@ -357,17 +357,14 @@ class PurchaseHeaderController extends Controller
                             if (isset($purchaseLineMap[$constraint])) {
                                 $purchaseLine = $purchaseLineMap[$constraint];
                             }
-                            //var_dump($purchaseLine);
-                            //echo 'here'.'<br>';
-                            //var_dump($order_qty, $received_qty);
-                            //die('here');
+                            
                             if ($order_qty > 0.00 && $user != 'PurchaseEditor') {
                                 //die('here');
                                 $unitPrice = trim($_POST['price'][$key]);
                                 $totalPrice = trim($_POST['totalPrice'][$key]);
-                                $urd_number = trim($_POST['urd_number'][$key]);
+                                $urd_number = isset(trim($_POST['urd_number'][$key])) ? trim($_POST['urd_number'][$key]) : 0;
                                 $isParent = ($_POST['parent_id'][$key] == 0) ? true : false;
-                                $flag = PurchaseHeader::validatePriceVendorInput($unitPrice, $totalPrice, $vendorId, $urd_number, $isParent);
+                                $flag = PurchaseHeader::validatePriceVendorInput($unitPrice, $totalPrice, $vendorId, $isParent);
                                 if ($flag['status'] == 1) {
                                     $purchaseLine->purchase_id = $model->id;
                                     $purchaseLine->base_product_id = $id;

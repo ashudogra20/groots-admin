@@ -10,7 +10,7 @@ if(isset($_GET['w_id'])){
 $this->menu=array(
     //array('label'=>'List InventoryHeader', 'url'=>array('index')),
     array('label'=>'Create Order', 'url'=>array('create&w_id='.$w_id)),
-    array('label' => 'Mail Short Sku', 'url' => array('mailConfirmedOrders'))
+    array('label' => 'Mail Short Sku', 'url' => array('mailConfirmedOrders&w_id='.$w_id))
 );
 $isAdmin = false;
 if($this->checkAccess('SuperAdmin')){

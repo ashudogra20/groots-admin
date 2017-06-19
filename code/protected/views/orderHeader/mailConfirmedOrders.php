@@ -1,6 +1,8 @@
 <?php
+
+$w_id = $_GET['w_id'];
 $this->breadcrumbs = array(
-    'Orders' => array('admin'),
+    'Orders' => array('admin&w_id='.$w_id),
 );
 ?>
 <?php if (Yii::app()->user->hasFlash('premission_info')): ?><div class="errorSummary"><?php echo Yii::app()->user->getFlash('premission_info'); ?></div><?php endif; ?>
@@ -81,7 +83,7 @@ echo '<br>';
 
         )
     ));
-echo CHtml::submitButton('Submit', array('name' => 'sendMail'));
+echo CHtml::button('Submit',array('submit' => array('orderHeader/mailConfirmedOrders&w_id='.$w_id), 'name'=>'sendMail'));
 //echo '<br>'.'<br>';
 ?>
     <a href="index.php?r=orderHeader/admin" class="button_new" style="width: auto;"

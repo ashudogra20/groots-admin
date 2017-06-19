@@ -31,9 +31,16 @@ class OrderHeaderController extends Controller {
         return true;
     }*/
     protected function beforeAction() {
+        //var_dump($this->action->id);die;
         $w_id='';
         if($this->action->id == 'sendMailToRetailerWithOrderId'){
             return true;
+        }
+        if($this->action->id == 'mailConfirmedOrders'){
+            $w_id = $_GET['w_id'];
+            if($this->checkAccessByData('WarehouseEditor', array('warehouse_id'=>$w_id))){
+                return true;    
+            }
         }
         else{
             if(parent::beforeAction()){
@@ -2281,7 +2288,7 @@ public function actionSendMailToRetailerWithOrderId($orderId){
 
 public function actionMailConfirmedOrders(){
     //echo '<pre>';
-    //var_dump($_POST);
+    //var_dump($_GET);die;
     $date = '';
     $model = new OrderLine('search');
     $model->unsetAttributes();
