@@ -176,7 +176,7 @@ class PurchaseHeaderController extends Controller
                                 $unitPrice = $_POST['price'][$key];
                                 $totalPrice = $_POST['totalPrice'][$key];
                                 $vendorId = $_POST['vendorId'][$key];
-                                $urd_number = isset(trim($_POST['urd_number'][$key])) ? trim($_POST['urd_number'][$key]) : 0;
+                                $urd_number = isset($_POST['urd_number'][$key]) ? trim($_POST['urd_number'][$key]) : 0;
                                 $isParent = ($_POST['parent_id'][$key] == 0) ? true : false;
                                 $flag = PurchaseHeader::validatePriceVendorInput($unitPrice, $totalPrice, $vendorId, $isParent);
                                 if ($flag['status'] == 1) {
@@ -362,7 +362,7 @@ class PurchaseHeaderController extends Controller
                                 //die('here');
                                 $unitPrice = trim($_POST['price'][$key]);
                                 $totalPrice = trim($_POST['totalPrice'][$key]);
-                                $urd_number = isset(trim($_POST['urd_number'][$key])) ? trim($_POST['urd_number'][$key]) : 0;
+                                $urd_number = isset($_POST['urd_number'][$key]) ? trim($_POST['urd_number'][$key]) : 0;
                                 $isParent = ($_POST['parent_id'][$key] == 0) ? true : false;
                                 $flag = PurchaseHeader::validatePriceVendorInput($unitPrice, $totalPrice, $vendorId, $isParent);
                                 if ($flag['status'] == 1) {
